@@ -1,7 +1,7 @@
 ##SimpleWiki
 >a simple & small wiki app
 
-[Demo](http://demo4simplewiki.herokuapp.com/)
+[Demo](https://demo4simplewiki.herokuapp.com/)
 
 ###Features
 
@@ -12,7 +12,7 @@
 ###Requirements
 
 - PHP `5.3+`
-- Apache (`mod_rewrite`) or Nginx (`try_files $uri $uri/ /index.php?$args`)
+- Apache (`mod_rewrite`) or Nginx (`try_files $uri $uri/ /index.php?$args;`)
 - Other dependence (`composer`)
 
 ```
