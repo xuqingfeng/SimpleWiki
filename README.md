@@ -15,7 +15,7 @@
 - Apache (`mod_rewrite`) or Nginx (`try_files $uri $uri/ /index.php?$args`)
 - Other dependence (`composer`)
 
-```php
+```
 {
     "require": {
         "erusev/parsedown": "1.5.*",
