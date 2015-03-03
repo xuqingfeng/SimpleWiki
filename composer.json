@@ -1,0 +1,6 @@
+{
+    "require": {
+        "erusev/parsedown": "1.5.*",
+        "mustache/mustache": "~2.5"
+    }
+}

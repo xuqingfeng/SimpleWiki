@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>SimpleWiki</title>
+    <link rel="stylesheet" href="../../assets/css/normalize.css"/>
+    <link rel="stylesheet" href="../../assets/css/vendor/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../assets/css/flat-ui.min.css"/>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{home}}">{{appName}}</a>
+    </div>
+    <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/xuqingfeng/SimpleWiki" target="_blank"><span class="fui-github"></span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="col-lg-3">
+    <span class="fui-folder"></span>
+</div>
+<div class="col-lg-9">
+    <span class="fui-list-columned">&nbsp;{{filePath}}</span>
+</div>
+
+<div class="col-lg-3">
+    <div class="input-group">
+        <span class="input-group-addon"><span class="fui-search"></span></span>
+        <input type="text" class="form-control" placeholder="Search" id="instantSearch"/>
+    </div>
+    <div id="fileArea">
+        <ul>
+            {{#files}}
+            <li data-name="{{name}}" data-link="{{link}}" data-type="{{type}}" data-yo="close" id="file">
+                {{#isDir}}{{name}}{{/isDir}}
+                {{^isDir}}<a href="{{link}}">{{name}}</a>{{/isDir}}
+                <br>
+            </li>
+            {{/files}}
+        </ul>
+    </div>
+
+</div>
+
+<div class="col-lg-9">
+    {{{content}}}
+</div>
+
+<script type="text/javascript" src="../../assets/js/vendor/jquery.min.js"></script>
+<script type="text/javascript" src="../../assets/js/flat-ui.min.js"></script>
+
+<script>
+    (function () {
+
+        var getFilesUrl = "/getFiles";
+
+        // open dir
+        $('#fileArea').on('click', '#file', function () {
+
+            var target = $(this);
+            var name = target.data('name');
+            var type = target.data('type');
+            var link = target.data('link');
+            var yo = target.data('yo');
+            if ('dir' == type && 'close' == yo) {
+                target.data('yo', 'open');
+                getFilesByDir(link, target);
+            }
+        });
+
+        // instant search
+        $('#instantSearch').on('keyup', function () {
+
+            var searchData = $(this).val();
+            if ('' != searchData) {
+                searchFiles(searchData);
+            } else {
+                getFilesByDir('', $('#fileArea'));
+            }
+        });
+
+        function getFilesByDir(link, target) {
+
+            $.ajax({
+                url: getFilesUrl,
+                type: 'POST',
+                data: {'link': link},
+                // fix 'Unexpected end of input'
+                dataType: 'json',
+                success: function (msg) {
+                    var stringInserted = "<ul>";
+                    $.each(msg['files'], function (key, value) {
+                        stringInserted += "<li data-name='" + value['name'] + "' data-link='" + value['link'] + "' data-type='" + value['type'] + "' data-yo='close' id='file'>";
+                        if ('dir' == value['type']) {
+                            stringInserted += value['name'];
+                        } else {
+                            stringInserted += "<a href='" + value['link'] + "'>" + value['name'] + "</a>";
+                        }
+                        stringInserted += "<br></li>";
+                    });
+                    stringInserted += "</ul>";
+                    target.append(stringInserted);
+                },
+                error: function () {
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        function searchFiles(searchData) {
+
+            $('#fileArea').empty();
+            $.ajax({
+                url: getFilesUrl,
+                type: 'POST',
+                data: {'search': searchData},
+                dataType: 'json',
+                success: function (msg) {
+                    var stringInserted = "<ul>";
+                    $.each(msg['files'], function (key, value) {
+                        stringInserted += "<li><a href='" + value['link'] + "'>" + value['name'] + "</a></li>";
+                    });
+                    stringInserted += "</ul>";
+
+                    $('#fileArea').append(stringInserted);
+                },
+                error: function () {
+                },
+                complete: function () {
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>
