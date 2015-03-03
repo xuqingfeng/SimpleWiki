@@ -109,6 +109,8 @@
 
         var getFilesUrl = "/getFiles";
 
+        mixpanel.track('view homepage');
+
         // open dir
         $('#fileArea').on('click', '#file', function () {
 
@@ -121,6 +123,7 @@
                 target.data('yo', 'open');
                 getFilesByDir(link, target);
             }
+            mixpanel.track('open dir');
         });
 
         // instant search
@@ -136,6 +139,7 @@
                 } else {
                     getFilesByDir('', $('#fileArea'));
                 }
+                mixpanel.track('search file');
             }
 
         });
