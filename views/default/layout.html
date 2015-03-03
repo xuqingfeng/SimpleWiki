@@ -124,6 +124,7 @@
 
         function searchFiles(searchData) {
 
+            $('#fileArea').empty();
             $.ajax({
                 url: getFilesUrl,
                 type: 'POST',
