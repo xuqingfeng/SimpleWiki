@@ -40,16 +40,16 @@ if ('/' == $request) {
 
 } else if ('/getFiles' == $request) {
     // get files by dir
-    $link = $_POST['link'];
     // search file
-    $search = $_POST['search'];
-    if (isset($link)) {
+    if (isset($_POST['link'])) {
+        $link = $_POST['link'];
         $files = $wikiFile->getFilesByDir(WIKI_DIR . $link);
         $msg = array();
         $msg['files'] = $files;
         echo json_encode($msg);
         exit;
-    } else if (isset($search)) {
+    } else if (isset($_POST['search'])) {
+        $search = $_POST['search'];
         $wikiFile->getAllFiles(WIKI_DIR);
         $files = $wikiFile->allFiles;
         $filesQualified = array();

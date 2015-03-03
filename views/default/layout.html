@@ -85,6 +85,7 @@
         $('#instantSearch').on('keyup', function () {
 
             var searchData = $(this).val();
+            $('#fileArea').empty();
             if ('' != searchData) {
                 searchFiles(searchData);
             } else {
@@ -123,7 +124,6 @@
 
         function searchFiles(searchData) {
 
-            $('#fileArea').empty();
             $.ajax({
                 url: getFilesUrl,
                 type: 'POST',
