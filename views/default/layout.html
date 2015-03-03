@@ -82,15 +82,19 @@
         });
 
         // instant search
+        var lock = false;
         $('#instantSearch').on('keyup', function () {
 
-            var searchData = $(this).val();
-            $('#fileArea').empty();
-            if ('' != searchData) {
-                searchFiles(searchData);
-            } else {
-                getFilesByDir('', $('#fileArea'));
+            if(!lock){
+                var searchData = $(this).val();
+                $('#fileArea').empty();
+                if ('' != searchData) {
+                    searchFiles(searchData);
+                } else {
+                    getFilesByDir('', $('#fileArea'));
+                }
             }
+
         });
 
         function getFilesByDir(link, target) {
@@ -114,6 +118,7 @@
                     });
                     stringInserted += "</ul>";
                     target.append(stringInserted);
+                    lock = false;
                 },
                 error: function () {
                 },
@@ -138,6 +143,7 @@
                     stringInserted += "</ul>";
 
                     $('#fileArea').append(stringInserted);
+                    lock = false;
                 },
                 error: function () {
                 },
