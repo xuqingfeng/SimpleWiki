@@ -94,7 +94,6 @@
                 } else {
                     getFilesByDir('', $('#fileArea'));
                 }
-                lock = false;
             }
 
         });
@@ -124,6 +123,7 @@
                 error: function () {
                 },
                 complete: function () {
+                    lock = false;
                 }
             });
         }
@@ -144,11 +144,11 @@
                     stringInserted += "</ul>";
 
                     $('#fileArea').append(stringInserted);
-                    console.log('search success');
                 },
                 error: function () {
                 },
                 complete: function () {
+                    lock = false;
                 }
             });
         }
