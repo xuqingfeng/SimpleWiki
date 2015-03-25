@@ -27,11 +27,12 @@ if ('/' == $request) {
         $fileContent = file_get_contents($path);
         $parsedContent = Parsedown::instance()->text($fileContent);
         $params = array(
-            'home'     => $home,
-            'appName'  => APP_NAME,
-            'filePath' => '',
-            'files'    => $files,
-            'content'  => $parsedContent,
+            'home'         => $home,
+            'appName'      => APP_NAME,
+            'filePath'     => 'README.md',
+            'files'        => $files,
+            'content'      => $parsedContent,
+            'lastModified' => date('Y-m-d H:i', filemtime($path)),
         );
         echo $wikiView->render('layout', $params);
     } else {
@@ -74,11 +75,12 @@ if ('/' == $request) {
         $files = $wikiFile->getFilesByDir(WIKI_DIR);
         $relativePath = str_replace(WIKI_DIR, '', $path);
         $params = array(
-            'home'     => $home,
-            'appName'  => APP_NAME,
-            'filePath' => $relativePath,
-            'files'    => $files,
-            'content'  => $parsedContent,
+            'home'         => $home,
+            'appName'      => APP_NAME,
+            'filePath'     => $relativePath,
+            'files'        => $files,
+            'content'      => $parsedContent,
+            'lastModified' => date('Y-m-d H:i', filemtime($path)),
         );
         echo $wikiView->render('layout', $params);
     } else {
