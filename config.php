@@ -9,5 +9,12 @@ return array(
     'app_name'     => 'SimpleWiki',
     'wiki_dir'     => __DIR__ . '/wiki',
     'default_view' => __DIR__ . '/views/default',
-    'timezone'     => 'Asia/Shanghai'
+    'timezone'     => 'Asia/Shanghai',
+    // global
+    'ignore_files' => array(
+        '.gitignore'
+    ),
+    'ignore_dirs'=>array(
+
+    )
 );

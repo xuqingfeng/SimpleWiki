@@ -13,7 +13,7 @@
         li {
             list-style: none;
         }
-        a > span {
+        .bg-yellow {
             background-color: #ffff00;
         }
     </style>
@@ -202,7 +202,7 @@
             });
         }
         function addBackground(fileName, searchData){
-            var searchResult = fileName.replace(searchData, "<span>"+searchData+"</span>");
+            var searchResult = fileName.replace(searchData, "<span class='bg-yellow'>"+searchData+"</span>");
             return searchResult;
         }
     })();

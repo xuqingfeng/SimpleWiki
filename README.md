@@ -12,6 +12,7 @@
 
 ###Requirements
 
+- Markdown
 - PHP `5.3+`
 - Apache (`mod_rewrite`) or Nginx (`try_files $uri $uri/ /index.php?$args;`)
 - Other dependence (`composer`)

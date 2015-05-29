@@ -26,7 +26,8 @@ class WikiFile {
         if (is_dir($path)) {
             $fileNames = scandir($path);
             $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));
-            foreach ($fileNamesWithoutDot as $p) {
+            $fileNamesRemained = array_diff($fileNamesWithoutDot, $this->config['ignore_files']);
+            foreach ($fileNamesRemained as $p) {
                 if (is_dir($path . "/" . $p)) {
                     $file = array();
                     $file['name'] = $p;
@@ -58,7 +59,8 @@ class WikiFile {
             $this->getFilesInDir($path);
             $fileNames = scandir($path);
             $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));
-            foreach ($fileNamesWithoutDot as $p) {
+            $fileNamesRemained = array_diff($fileNamesWithoutDot, $this->config['ignore_files']);
+            foreach ($fileNamesRemained as $p) {
                 if (is_dir($path . "/" . $p)) {
                     $this->getAllFiles($path . "/" . $p);
                 }
@@ -73,7 +75,8 @@ class WikiFile {
         if (is_dir($path)) {
             $fileNames = scandir($path);
             $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));
-            foreach ($fileNamesWithoutDot as $p) {
+            $fileNamesRemained = array_diff($fileNamesWithoutDot, $this->config['ignore_files']);
+            foreach ($fileNamesRemained as $p) {
                 if (is_file($path . "/" . $p)) {
                     $pathParts = pathinfo($path . "/" . $p);
                     $file = array();
