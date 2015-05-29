@@ -23,12 +23,12 @@ if ('/' == $request) {
 
     $path = __DIR__ . '/README.md';
     if (file_exists($path)) {
-        $files = $wikiFile->getFilesByDir(WIKI_DIR);
+        $files = $wikiFile->getFilesByDir($config['wiki_dir']);
         $fileContent = file_get_contents($path);
         $parsedContent = Parsedown::instance()->text($fileContent);
         $params = array(
             'home'         => $home,
-            'appName'      => APP_NAME,
+            'appName'      => $config['app_name'],
             'filePath'     => 'README.md',
             'files'        => $files,
             'content'      => $parsedContent,
@@ -44,14 +44,14 @@ if ('/' == $request) {
     // search file
     if (isset($_POST['link'])) {
         $link = $_POST['link'];
-        $files = $wikiFile->getFilesByDir(WIKI_DIR . $link);
+        $files = $wikiFile->getFilesByDir($config['wiki_dir'] . $link);
         $msg = array();
         $msg['files'] = $files;
         echo json_encode($msg);
         exit;
     } else if (isset($_POST['search'])) {
         $search = $_POST['search'];
-        $wikiFile->getAllFiles(WIKI_DIR);
+        $wikiFile->getAllFiles($config['wiki_dir']);
         $files = $wikiFile->allFiles;
         $filesQualified = array();
         foreach ($files as $f) {
@@ -67,16 +67,16 @@ if ('/' == $request) {
 
 } else {
 
-    $path = WIKI_DIR . $request . '.md';
+    $path = $config['wiki_dir'] . $request . '.md';
     if (file_exists($path)) {
         $fileContent = file_get_contents($path);
         $parsedContent = Parsedown::instance()->text($fileContent);
 
-        $files = $wikiFile->getFilesByDir(WIKI_DIR);
-        $relativePath = str_replace(WIKI_DIR, '', $path);
+        $files = $wikiFile->getFilesByDir($config['wiki_dir']);
+        $relativePath = str_replace($config['wiki_dir'], '', $path);
         $params = array(
             'home'         => $home,
-            'appName'      => APP_NAME,
+            'appName'      => $config['app_name'],
             'filePath'     => $relativePath,
             'files'        => $files,
             'content'      => $parsedContent,

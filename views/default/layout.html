@@ -13,6 +13,9 @@
         li {
             list-style: none;
         }
+        a > span {
+            background-color: #ffff00;
+        }
     </style>
     <!-- start Mixpanel -->
     <script type="text/javascript">(function (f, b) {
@@ -110,7 +113,7 @@
 
         var getFilesUrl = "/getFiles";
 
-        mixpanel.track('view homepage');
+        mixpanel.track('PV');
 
         // open dir
         $('#fileArea').on('click', '#file', function () {
@@ -124,7 +127,6 @@
                 target.data('yo', 'open');
                 getFilesByDir(link, target);
             }
-            mixpanel.track('open dir');
         });
 
         // instant search
@@ -140,7 +142,6 @@
                 } else {
                     getFilesByDir('', $('#fileArea'));
                 }
-                mixpanel.track('search file');
             }
 
         });
@@ -186,7 +187,8 @@
                 success: function (msg) {
                     var stringInserted = "<ul>";
                     $.each(msg['files'], function (key, value) {
-                        stringInserted += "<li><a href='" + value['link'] + "'>" + value['name'] + "</a></li>";
+//                        stringInserted += "<li><a href='" + value['link'] + "'>" + value['name'] + "</a></li>";
+                        stringInserted += "<li><a href='" + value['link'] + "'>" + addBackground(value['name'], searchData) + "</a></li>";
                     });
                     stringInserted += "</ul>";
 
@@ -198,6 +200,10 @@
                     lock = false;
                 }
             });
+        }
+        function addBackground(fileName, searchData){
+            var searchResult = fileName.replace(searchData, "<span>"+searchData+"</span>");
+            return searchResult;
         }
     })();
 </script>

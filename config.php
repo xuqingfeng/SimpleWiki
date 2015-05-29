@@ -5,6 +5,9 @@
  */
 
 
-define('APP_NAME', 'SimpleWiki');
-define('WIKI_DIR', __DIR__ . '/wiki');
-define('DEFAULT_VIEW', __DIR__ . '/views/default');
+return array(
+    'app_name'     => 'SimpleWiki',
+    'wiki_dir'     => __DIR__ . '/wiki',
+    'default_view' => __DIR__ . '/views/default',
+    'timezone'     => 'Asia/Shanghai'
+);

@@ -10,15 +10,18 @@ require_once __DIR__ . "/../autoload.php";
 class WikiFile {
 
     public $allFiles;
+    public $config;
 
     public function __construct() {
 
         $this->allFiles = array();
+        global $config;
+        $this->config = $config;
     }
 
     public function getFilesByDir($path) {
 
-        $relativePath = str_replace(WIKI_DIR, '', $path);
+        $relativePath = str_replace($this->config['wiki_dir'], '', $path);
         $files = array();
         if (is_dir($path)) {
             $fileNames = scandir($path);
@@ -66,7 +69,7 @@ class WikiFile {
 
     public function getFilesInDir($path) {
 
-        $relativePath = str_replace(WIKI_DIR, '', $path);
+        $relativePath = str_replace($this->config['wiki_dir'], '', $path);
         if (is_dir($path)) {
             $fileNames = scandir($path);
             $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));

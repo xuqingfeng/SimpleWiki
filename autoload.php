@@ -4,10 +4,13 @@
  * Date: 15/3/3
  */
 
-require_once __DIR__."/config.php";
-require_once __DIR__."/vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
-spl_autoload_register(function($class){
+$config = require_once(__DIR__ . "/config.php");
+
+date_default_timezone_set($config['timezone']);
+
+spl_autoload_register(function ($class) {
 
     $prefix = '';
     $base_dir = __DIR__ . '/models/';
