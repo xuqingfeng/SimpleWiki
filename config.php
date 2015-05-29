@@ -13,8 +13,5 @@ return array(
     // global
     'ignore_files' => array(
         '.gitignore'
-    ),
-    'ignore_dirs'=>array(
-
     )
 );
