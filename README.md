@@ -30,14 +30,12 @@
 
 download zip file or git clone this project, then put them on your server and you are free to write your wiki in `wiki` folder.
 
----
+###License
 
-**other things you may want to check out**
+GPLv3
+
+###Wiki
 
 [vhosts setup](https://github.com/xuqingfeng/SimpleWiki/wiki/Setup-virtual-host)
 
 [dropbox sync](https://github.com/xuqingfeng/SimpleWiki/wiki/Sync-to-Dropbox-with-symbolic-link)
-
-###License
-
-GPLv3
