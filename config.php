@@ -6,12 +6,15 @@
 
 
 return [
-    'app_name'     => 'SimpleWiki',
-    'wiki_dir'     => __DIR__ . '/wiki',
-    'default_view' => __DIR__ . '/views/default',
-    'timezone'     => 'Asia/Shanghai',
-    // global
-    'ignore_files' => [
-        '.gitignore'
+    'APP_NAME'       => 'SimpleWiki',
+    'WIKI_DIR'       => __DIR__ . '/wiki',
+    'WIKI_FILE_EXTENSION' => '.md',
+    'DEFAULT_VIEW'   => __DIR__ . '/views/default',
+    'DEFAULT_WIKI'   => __DIR__ . '/README',
+    'TIMEZONE'       => 'Asia/Shanghai',
+    'IGNORE_FILES'   => [
+        '.gitignore',
+        '.',
+        '..'
     ]
 ];
