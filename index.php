@@ -26,14 +26,14 @@ if ('/' == $request) {
         $files = $wikiFile->getFilesByDir($config['wiki_dir']);
         $fileContent = file_get_contents($path);
         $parsedContent = Parsedown::instance()->text($fileContent);
-        $params = array(
+        $params = [
             'home'         => $home,
             'appName'      => $config['app_name'],
             'filePath'     => 'README.md',
             'files'        => $files,
             'content'      => $parsedContent,
             'lastModified' => date('Y-m-d H:i', filemtime($path)),
-        );
+        ];
         echo $wikiView->render('layout', $params);
     } else {
         echo $wikiView->render('404');
@@ -45,7 +45,7 @@ if ('/' == $request) {
     if (isset($_POST['link'])) {
         $link = $_POST['link'];
         $files = $wikiFile->getFilesByDir($config['wiki_dir'] . $link);
-        $msg = array();
+        $msg = [];
         $msg['files'] = $files;
         echo json_encode($msg);
         exit;
@@ -53,13 +53,13 @@ if ('/' == $request) {
         $search = $_POST['search'];
         $wikiFile->getAllFiles($config['wiki_dir']);
         $files = $wikiFile->allFiles;
-        $filesQualified = array();
+        $filesQualified = [];
         foreach ($files as $f) {
             if (preg_match('/' . $search . '/', $f['name'])) {
                 $filesQualified[] = $f;
             }
         }
-        $msg = array();
+        $msg = [];
         $msg['files'] = $filesQualified;
         echo json_encode($msg);
         exit;
@@ -74,14 +74,14 @@ if ('/' == $request) {
 
         $files = $wikiFile->getFilesByDir($config['wiki_dir']);
         $relativePath = str_replace($config['wiki_dir'], '', $path);
-        $params = array(
+        $params = [
             'home'         => $home,
             'appName'      => $config['app_name'],
             'filePath'     => $relativePath,
             'files'        => $files,
             'content'      => $parsedContent,
             'lastModified' => date('Y-m-d H:i', filemtime($path)),
-        );
+        ];
         echo $wikiView->render('layout', $params);
     } else {
         echo $wikiView->render('404');

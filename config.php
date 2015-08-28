@@ -5,13 +5,13 @@
  */
 
 
-return array(
+return [
     'app_name'     => 'SimpleWiki',
     'wiki_dir'     => __DIR__ . '/wiki',
     'default_view' => __DIR__ . '/views/default',
     'timezone'     => 'Asia/Shanghai',
     // global
-    'ignore_files' => array(
+    'ignore_files' => [
         '.gitignore'
-    )
-);
+    ]
+];

@@ -14,7 +14,7 @@ class WikiFile {
 
     public function __construct() {
 
-        $this->allFiles = array();
+        $this->allFiles = [];
         global $config;
         $this->config = $config;
     }
@@ -22,14 +22,14 @@ class WikiFile {
     public function getFilesByDir($path) {
 
         $relativePath = str_replace($this->config['wiki_dir'], '', $path);
-        $files = array();
+        $files = [];
         if (is_dir($path)) {
             $fileNames = scandir($path);
-            $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));
+            $fileNamesWithoutDot = array_diff($fileNames, ['.', '..']);
             $fileNamesRemained = array_diff($fileNamesWithoutDot, $this->config['ignore_files']);
             foreach ($fileNamesRemained as $p) {
                 if (is_dir($path . "/" . $p)) {
-                    $file = array();
+                    $file = [];
                     $file['name'] = $p;
                     $file['link'] = $relativePath . "/" . $p;
                     $file['type'] = 'dir';
@@ -39,7 +39,7 @@ class WikiFile {
 
                 if (is_file($path . "/" . $p)) {
                     $pathParts = pathinfo($path . "/" . $p);
-                    $file = array();
+                    $file = [];
                     $file['name'] = $pathParts['basename'];
                     $file['link'] = $relativePath . "/" . $pathParts['filename'];
                     $file['type'] = 'file';
@@ -58,7 +58,7 @@ class WikiFile {
         if (is_dir($path)) {
             $this->getFilesInDir($path);
             $fileNames = scandir($path);
-            $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));
+            $fileNamesWithoutDot = array_diff($fileNames, ['.', '..']);
             $fileNamesRemained = array_diff($fileNamesWithoutDot, $this->config['ignore_files']);
             foreach ($fileNamesRemained as $p) {
                 if (is_dir($path . "/" . $p)) {
@@ -74,12 +74,12 @@ class WikiFile {
         $relativePath = str_replace($this->config['wiki_dir'], '', $path);
         if (is_dir($path)) {
             $fileNames = scandir($path);
-            $fileNamesWithoutDot = array_diff($fileNames, array('.', '..'));
+            $fileNamesWithoutDot = array_diff($fileNames, ['.', '..']);
             $fileNamesRemained = array_diff($fileNamesWithoutDot, $this->config['ignore_files']);
             foreach ($fileNamesRemained as $p) {
                 if (is_file($path . "/" . $p)) {
                     $pathParts = pathinfo($path . "/" . $p);
-                    $file = array();
+                    $file = [];
                     $file['name'] = $pathParts['basename'];
                     $file['link'] = $relativePath . "/" . $pathParts['filename'];
                     $file['type'] = 'file';

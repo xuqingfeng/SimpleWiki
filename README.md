@@ -1,5 +1,5 @@
 ##SimpleWiki
->a simple & small wiki app
+>a simple & small wiki service just as you need.
 
 [Demo](https://demo4simplewiki.herokuapp.com/)
 
@@ -13,8 +13,8 @@
 ###Requirements
 
 - Markdown
-- PHP `5.3+`
-- Apache (`mod_rewrite`) or Nginx (`try_files $uri $uri/ /index.php?$args;`)
+- PHP `5.4+`
+- Apache (`mod_rewrite`); Nginx (`try_files $uri $uri/ /index.php?$args;`) or use PHP built in Server (`php -S 0.0.0.0:8888`)
 - Other dependence (`composer`)
 
 ```
@@ -28,14 +28,14 @@
 
 ###Install
 
+>with composer
+
+``
+
+>plain install
+
 download zip file or git clone this project, then put them on your server and you are free to write your wiki in `wiki` folder.
 
 ###License
 
 GPLv3
-
-###Wiki
-
-[vhosts setup](https://github.com/xuqingfeng/SimpleWiki/wiki/Setup-virtual-host)
-
-[dropbox sync](https://github.com/xuqingfeng/SimpleWiki/wiki/Sync-to-Dropbox-with-symbolic-link)
