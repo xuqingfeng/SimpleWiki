@@ -43,4 +43,4 @@ Download zip file OR git clone this project
 
 ###License
 
-GPLv3
+GPL-3.0
