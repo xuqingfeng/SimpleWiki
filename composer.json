@@ -20,6 +20,6 @@
         "mustache/mustache": "~2.5"
     },
     "autoload": {
-        "file": "autoload.php"
+        "files": "autoload.php"
     }
 }
