@@ -1,7 +1,6 @@
 {
     "name": "xuqingfeng/simplewiki",
     "description": "a simple & small wiki service just as you need",
-    "version": "0.1.0",
     "type": "library",
     "keywords": [
         "wiki",
