@@ -9,7 +9,7 @@
     "minimum-stability": "dev",
     "homepage": "https://demo4simplewiki.herokuapp.com/",
     "license": "GPL-3.0",
-    "author": [
+    "authors": [
         {
             "name": "xuqingfeng",
             "email": "js-xqf@hotmail.com"
@@ -21,6 +21,6 @@
         "mustache/mustache": "~2.5"
     },
     "autoload": {
-        "files": "autoload.php"
+        "files": ["autoload.php"]
     }
 }
