@@ -14,11 +14,11 @@
 
 - Markdown
 - PHP `5.4+`
-- Use PHP built in Server (`php -S 0.0.0.0:8888`);
+- Use PHP built in Server (`php -S 0.0.0.0:8888`)
 
   Apache (`mod_rewrite`)
 
-  OR Nginx (`try_files $uri $uri/ /index.php?$args;`)
+  Nginx (`try_files $uri $uri/ /index.php?$args;`)
 
 - Other dependence (`composer`)
 
