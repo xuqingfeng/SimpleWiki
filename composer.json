@@ -1,6 +1,26 @@
 {
+    "name": "xuqingfeng/simplewiki",
+    "description": "a simple & small wiki service just as you need",
+    "version": "0.1.0",
+    "type": "library",
+    "keywords": [
+        "wiki",
+        "cms"
+    ],
+    "homepage": "https://demo4simplewiki.herokuapp.com/",
+    "license": "GPLv3",
+    "author": [
+        {
+            "name": "xuqingfeng",
+            "email": "js-xqf@hotmail.com"
+        }
+    ],
     "require": {
+        "php": ">5.4",
         "erusev/parsedown": "1.5.*",
         "mustache/mustache": "~2.5"
+    },
+    "autoload": {
+        "file": "autoload.php"
     }
 }
