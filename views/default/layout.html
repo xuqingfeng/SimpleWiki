@@ -147,7 +147,7 @@
         });
 
         function getFilesByDir(link, target) {
-
+            console.log(link);
             $.ajax({
                 url: getFilesUrl,
                 type: 'POST',
@@ -155,6 +155,7 @@
                 // fix 'Unexpected end of input'
                 dataType: 'json',
                 success: function (msg) {
+                    console.log(msg);
                     var stringInserted = "<ul>";
                     $.each(msg['files'], function (key, value) {
                         stringInserted += "<li data-name='" + value['name'] + "' data-link='" + value['link'] + "' data-type='" + value['type'] + "' data-yo='close' id='file'>";

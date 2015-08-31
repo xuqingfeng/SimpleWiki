@@ -15,9 +15,10 @@ class SimpleWiki {
     public function __construct() {
 
         global $config;
+        $this->config = $config;
+        $this->allFiles = [];
 
         $request = $_SERVER["REQUEST_URI"];
-        $request = urlencode($request);
 
         $protocol = $this->getProtocol();
         $homepage = $protocol . $_SERVER["HTTP_HOST"];
@@ -26,7 +27,7 @@ class SimpleWiki {
         $options = ['extension' => '.html'];
         $this->mustache = new Mustache_Engine([
                 'loader'           => new Mustache_Loader_FilesystemLoader($this->config["DEFAULT_VIEW"], $options),
-                'partials_loader'  => new Mustache_Loader_FilesystemLoader($this->config["DEFAULT_VIEW"] . '/partials', $options),
+                'partials_loader'  => new Mustache_Loader_FilesystemLoader($this->config["DEFAULT_VIEW"] . "/partials", $options),
                 'escape'           => function ($value) {
 
                     return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
@@ -41,10 +42,57 @@ class SimpleWiki {
         if ("/" == $request) {
 
             $path = $this->config["DEFAULT_WIKI"] . $this->config["WIKI_FILE_EXTENSION"];
+
             if (file_exists($path)) {
                 $files = $this->getFilesInDir($this->config["WIKI_DIR"]);
                 $content = $this->parseContent($this->config["DEFAULT_WIKI"] . $this->config["WIKI_FILE_EXTENSION"]);
-                $filePath = str_replace($this->config["WIKI_DIR"], "", $this->config["DEFAULT_WIKI"]);
+//                $filePath = str_replace($this->config["WIKI_DIR"], "", $this->config["DEFAULT_WIKI"]);
+
+                $params = [
+                    "appName"      => $this->config["APP_NAME"],
+                    "homepage"     => $homepage,
+                    "filePath"     => "",
+                    "files"        => $files,
+                    "content"      => $content,
+                    "lastModified" => date("Y-m-d H:i", filemtime($path)),
+                ];
+                echo $this->mustache->render("layout", $params);
+            } else {
+                echo $this->mustache->render("404");
+            }
+        } else if ("/getFiles" == $request) {
+
+            if (isset($_POST["link"])) {
+                // get files in dir
+                $link = $_POST["link"];
+                $files = $this->getFilesInDir($this->config["WIKI_DIR"] . "/$link");
+                $msg = [
+                    "files" => $files,
+                ];
+                echo json_encode($msg);
+                exit;
+            } else if (isset($_POST["search"])) {
+                // search file
+                $search = $_POST["search"];
+                $this->getAllWikiFiles($this->config["WIKI_DIR"]);
+                $filesQualified = [];
+                foreach ($this->allFiles as $f) {
+                    if (preg_match('/' . $search . '/', $f["name"])) {
+                        $filesQualified[] = $f;
+                    }
+                }
+                $msg = [];
+                $msg["files"] = $filesQualified;
+                echo json_encode($msg);
+                exit;
+            }
+
+        } else {
+            $path = $this->config["WIKI_DIR"] . $request . $this->config["WIKI_FILE_EXTENSION"];
+            if (file_exists($path)) {
+                $files = $this->getFilesInDir($this->config["WIKI_DIR"]);
+                $content = $this->parseContent($path);
+                $filePath = str_replace($this->config["WIKI_DIR"], "", $path);
 
                 $params = [
                     "appName"      => $this->config["APP_NAME"],
@@ -54,29 +102,10 @@ class SimpleWiki {
                     "content"      => $content,
                     "lastModified" => date("Y-m-d H:i", filemtime($path)),
                 ];
-                $this->mustache->render("layout", $params);
+                echo $this->mustache->render("layout", $params);
             } else {
-                $this->mustache->render("404");
+                echo $this->mustache->render("404");
             }
-        } else if ("getFiles" == $request) {
-
-            if ($_POST["link"]) {
-                // get files in dir
-                $link = $_POST["link"];
-                $files = $this->getFilesInDir($this->config["WIKI_DIR"] . $link);
-                $msg = [
-                    "files" => $files,
-                ];
-                echo json_encode($msg);
-                exit;
-            } else if ($_POST["search"]) {
-                // search file
-                $search = $_POST["search"];
-
-            }
-
-        } else {
-
         }
     }
 
@@ -136,7 +165,13 @@ class SimpleWiki {
                 if (is_dir($path . "/" . $f)) {
                     $this->getAllWikiFiles($path . "/" . $f);
                 } else {
-                    $this->allFiles[] = $f;
+                    $relativePath = str_replace($this->config["WIKI_DIR"], "", $path);
+                    $pathParts = pathinfo($path . "/" . $f);
+                    $file = [
+                        "name" => $f,
+                        "link" => $relativePath . "/" . $pathParts["filename"],
+                    ];
+                    $this->allFiles[] = $file;
                 }
             }
         }
