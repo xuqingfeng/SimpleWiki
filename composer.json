@@ -6,6 +6,7 @@
         "wiki",
         "cms"
     ],
+    "minimum-stability": "dev",
     "homepage": "https://demo4simplewiki.herokuapp.com/",
     "license": "GPLv3",
     "author": [
