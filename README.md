@@ -35,7 +35,7 @@
 
 >with composer
 
-``
+`composer create-project xuqingfeng/simplewiki`
 
 >plain install
 
