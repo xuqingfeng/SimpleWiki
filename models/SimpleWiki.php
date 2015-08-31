@@ -16,7 +16,7 @@ class SimpleWiki {
 
         global $config;
 
-        $request = $_SERVER["EQUEST_URI"];
+        $request = $_SERVER["REQUEST_URI"];
         $request = urlencode($request);
 
         $protocol = $this->getProtocol();
