@@ -16,6 +16,7 @@ class SimpleWiki {
 
         global $config;
         $this->config = $config;
+
         $this->allFiles = [];
 
         $request = $_SERVER["REQUEST_URI"];
@@ -26,6 +27,7 @@ class SimpleWiki {
         // mustache
         $options = ['extension' => '.html'];
         $this->mustache = new Mustache_Engine([
+                // wtf
                 'loader'           => new Mustache_Loader_FilesystemLoader($this->config["DEFAULT_VIEW"], $options),
                 'partials_loader'  => new Mustache_Loader_FilesystemLoader($this->config["DEFAULT_VIEW"] . "/partials", $options),
                 'escape'           => function ($value) {

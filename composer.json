@@ -16,11 +16,8 @@
         }
     ],
     "require": {
-        "php": "~5.6.0",
+        "php": ">5.4",
         "erusev/parsedown": "1.5.*",
         "mustache/mustache": "~2.5"
-    },
-    "autoload": {
-        "files": ["autoload.php"]
     }
 }
