@@ -6,7 +6,7 @@
 ###Features
 
 - Markdown support
-- File name fuzzy search
+- File name search
 - Sweet page
 - Beautiful url
 

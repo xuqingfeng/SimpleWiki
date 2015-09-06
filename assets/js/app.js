@@ -48,18 +48,17 @@
             // fix 'Unexpected end of input'
             dataType: 'json',
             success: function (msg) {
-                console.log(msg);
-                var stringInserted = "<div class='folder'>";
+                var stringInserted = "<ul class='folder'>";
                 $.each(msg['files'], function (key, value) {
-                    stringInserted += "<div data-name='" + value['name'] + "' data-link='" + value['link'] + "' data-type='" + value['type'] + "' data-yo='close' id='file'>";
+                    stringInserted += "<li data-name='" + value['name'] + "' data-link='" + value['link'] + "' data-type='" + value['type'] + "' data-yo='close' id='file'>";
                     if ('dir' == value['type']) {
                         stringInserted += value['name'];
                     } else {
                         stringInserted += "<a href='" + value['link'] + "'>" + value['name'] + "</a>";
                     }
-                    stringInserted += "<br></div>";
+                    stringInserted += "<br></li>";
                 });
-                stringInserted += "</div>";
+                stringInserted += "</ul>";
                 target.append(stringInserted);
             },
             error: function () {
@@ -81,11 +80,11 @@
             data: {'search': searchData},
             dataType: 'json',
             success: function (msg) {
-                var stringInserted = "<ul>";
+                var stringInserted = "";
                 $.each(msg['files'], function (key, value) {
                     stringInserted += "<li><a href='" + value['link'] + "'>" + addBackground(value['name'], searchData) + "</a></li>";
                 });
-                stringInserted += "</ul>";
+                stringInserted += "";
 
                 $('#fileArea').append(stringInserted);
             },
@@ -102,11 +101,11 @@
         return searchResult;
     }
 
+    var dot = document.getElementById("loading");
 
     var loading = {
         intervalId: 0,
         start: function(){
-            var dot = document.getElementById("loading");
             dot.innerHTML = "";
             this.intervalId = setInterval(function(){
                 if( dot.innerHTML.length < 4){
@@ -118,6 +117,7 @@
         },
         stop: function(){
             clearInterval(this.intervalId);
+            dot.innerHTML = "";
         }
     };
 

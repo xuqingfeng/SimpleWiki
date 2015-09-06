@@ -14,8 +14,9 @@
         li {
             list-style: none;
         }
-        .folder {
-            margin-left: 1rem;
+        ul.folder {
+            margin-left: 0px;
+            padding-left: 1rem;
         }
         .bg-yellow {
             background-color: #ffff00;
@@ -92,8 +93,8 @@
         <span class="input-group-addon"><span class="fui-search"></span></span>
         <input type="text" class="form-control" placeholder="Search" id="instantSearch"/>
     </div>
-    <div id="fileArea">
-        <ul>
+    <div>
+        <ul id="fileArea">
             {{#files}}
             <li data-name="{{name}}" data-link="{{link}}" data-type="{{type}}" data-yo="close" id="file">
                 {{#isDir}}{{name}}{{/isDir}}
@@ -108,12 +109,6 @@
 
 <div class="col-lg-9">
     {{{content}}}
-</div>
-
-
-<div class="row">
-    <button id="start">start</button>
-    <button id="stop">stop</button>
 </div>
 
 <script type="text/javascript" src="../../assets/js/vendor/jquery.min.js"></script>
