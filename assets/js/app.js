@@ -1,7 +1,3 @@
-/**
- * Created by jsxqf on 15/9/2.
- */
-
 (function () {
 
     var getFilesUrl = "/getFiles";
