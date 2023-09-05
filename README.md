@@ -1,16 +1,16 @@
-##SimpleWiki
+## SimpleWiki
 >a simple & small wiki service just as you need.
 
 [Demo](https://demo4simplewiki.herokuapp.com/)
 
-###Features
+### Features
 
 - Markdown support
 - File name search
 - Sweet page
 - Beautiful url
 
-###Requirements
+### Requirements
 
 - Markdown
 - PHP `5.4+`
@@ -31,7 +31,7 @@
 }
 ```
 
-###Install
+### Install
 
 >with composer
 
@@ -41,6 +41,6 @@
 
 Download zip file OR git clone this project
 
-###License
+### License
 
 GPL-3.0
