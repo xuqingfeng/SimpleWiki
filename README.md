@@ -12,14 +12,8 @@
 
 ### Requirements
 
-- Markdown
 - PHP `8.1+`
 - Use PHP built-in Server (`php -S 0.0.0.0:8888`)
-
-  Apache (`mod_rewrite`)
-
-  Nginx (`try_files $uri $uri/ /index.php?$args;`)
-
 - Other dependence (`composer`)
 
 ```
