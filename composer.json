@@ -6,7 +6,7 @@
         "wiki",
         "cms"
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "homepage": "https://demo4simplewiki.herokuapp.com/",
     "license": "GPL-3.0",
     "authors": [
@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": ">5.4",
-        "erusev/parsedown": "1.5.*",
-        "mustache/mustache": "~2.5"
+        "php": "^8.5",
+        "erusev/parsedown": "^1.8",
+        "mustache/mustache": "^3.0"
     }
 }

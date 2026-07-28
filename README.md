@@ -13,7 +13,7 @@
 ### Requirements
 
 - Markdown
-- PHP `5.4+`
+- PHP `8.5+`
 - Use PHP built-in Server (`php -S 0.0.0.0:8888`)
 
   Apache (`mod_rewrite`)
@@ -25,8 +25,9 @@
 ```
 {
     "require": {
-        "erusev/parsedown": "1.5.*",
-        "mustache/mustache": "~2.5"
+        "php": "^8.5",
+        "erusev/parsedown": "^1.8",
+        "mustache/mustache": "^3.0"
     }
 }
 ```
