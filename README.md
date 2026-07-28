@@ -1,7 +1,7 @@
 ## SimpleWiki
 >A simple & small wiki service just as you need.
 
-[Demo](https://demo4simplewiki.herokuapp.com/)
+[Demo](https://simplewiki.helldivers.cn/)
 
 ### Features
 
