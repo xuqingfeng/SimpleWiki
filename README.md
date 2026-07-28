@@ -36,11 +36,14 @@
 
 >with composer
 
-`composer create-project xuqingfeng/simplewiki`
+- composer create-project xuqingfeng/simplewiki
+- php -S 0.0.0.0:8888
 
 >plain install
 
-Download zip file OR git clone this project
+- git clone
+- composer install
+- php -S 0.0.0.0:8888
 
 ### License
 
