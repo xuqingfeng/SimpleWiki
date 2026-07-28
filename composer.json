@@ -11,12 +11,11 @@
     "license": "GPL-3.0",
     "authors": [
         {
-            "name": "xuqingfeng",
-            "email": "js-xqf@hotmail.com"
+            "name": "xuqingfeng"
         }
     ],
     "require": {
-        "php": "^8.5",
+        "php": "^8.1",
         "erusev/parsedown": "^1.8",
         "mustache/mustache": "^3.0"
     }

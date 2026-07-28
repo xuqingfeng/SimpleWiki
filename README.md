@@ -1,5 +1,5 @@
 ## SimpleWiki
->a simple & small wiki service just as you need.
+>A simple & small wiki service just as you need.
 
 [Demo](https://demo4simplewiki.herokuapp.com/)
 
@@ -13,7 +13,7 @@
 ### Requirements
 
 - Markdown
-- PHP `8.5+`
+- PHP `8.1+`
 - Use PHP built-in Server (`php -S 0.0.0.0:8888`)
 
   Apache (`mod_rewrite`)
@@ -25,7 +25,7 @@
 ```
 {
     "require": {
-        "php": "^8.5",
+        "php": "^8.1",
         "erusev/parsedown": "^1.8",
         "mustache/mustache": "^3.0"
     }
