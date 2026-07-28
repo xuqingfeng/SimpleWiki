@@ -1,24 +1,31 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "6f05944efb2694ce60a6073e68a9f292",
+    "content-hash": "2fce118b673d7b9332a1d4846e4954eb",
     "packages": [
         {
             "name": "erusev/parsedown",
-            "version": "1.5.4",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "0e89e3714bda18973184d30646306bb0a482bd96"
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/0e89e3714bda18973184d30646306bb0a482bd96",
-                "reference": "0e89e3714bda18973184d30646306bb0a482bd96",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/96baaad00f71ba04d76e45b4620f54d3beabd6f7",
+                "reference": "96baaad00f71ba04d76e45b4620f54d3beabd6f7",
                 "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5|^8.5|^9.6"
             },
             "type": "library",
             "autoload": {
@@ -43,34 +50,47 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2015-08-03 09:24:05"
+            "support": {
+                "issues": "https://github.com/erusev/parsedown/issues",
+                "source": "https://github.com/erusev/parsedown/tree/1.8.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/erusev",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-16T11:41:01+00:00"
         },
         {
             "name": "mustache/mustache",
-            "version": "v2.8.0",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/mustache.php.git",
-                "reference": "64c28cc73e01d5edcef7de8cb2b16782615f648a"
+                "reference": "bd4fb2e45ac2df0570c0f4da6898054a950d1ed0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/64c28cc73e01d5edcef7de8cb2b16782615f648a",
-                "reference": "64c28cc73e01d5edcef7de8cb2b16782615f648a",
+                "url": "https://api.github.com/repos/bobthecow/mustache.php/zipball/bd4fb2e45ac2df0570c0f4da6898054a950d1ed0",
+                "reference": "bd4fb2e45ac2df0570c0f4da6898054a950d1ed0",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.4"
+                "php": ">=5.6"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "~1.6",
-                "phpunit/phpunit": "~3.7|~4.0"
+                "friendsofphp/php-cs-fixer": "~2.19.3",
+                "yoast/phpunit-polyfills": "^2.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Mustache": "src/"
-                }
+                "psr-4": {
+                    "Mustache\\": "src/"
+                },
+                "classmap": [
+                    "src/compat.php"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -89,17 +109,22 @@
                 "mustache",
                 "templating"
             ],
-            "time": "2015-04-01 06:37:33"
+            "support": {
+                "issues": "https://github.com/bobthecow/mustache.php/issues",
+                "source": "https://github.com/bobthecow/mustache.php/tree/v3.2.0"
+            },
+            "time": "2026-05-10T04:13:08+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
-    "stability-flags": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">5.4"
+        "php": "^8.5"
     },
-    "platform-dev": []
+    "platform-dev": {},
+    "plugin-api-version": "2.9.0"
 }
