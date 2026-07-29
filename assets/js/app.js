@@ -2,8 +2,6 @@
 
     var getFilesUrl = "/getFiles";
 
-    mixpanel.track('PV');
-
     // open dir
     $('#fileArea').on('click', '#file', function () {
 
