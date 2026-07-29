@@ -54,6 +54,7 @@
                 });
                 stringInserted += "</ul>";
                 target.append(stringInserted);
+                highlightCurrentFile();
                 if (typeof done === 'function') {
                     done();
                 }
@@ -84,6 +85,7 @@
                 stringInserted += "";
 
                 $('#fileArea').append(stringInserted);
+                highlightCurrentFile();
             },
             error: function () {
             },
@@ -98,17 +100,37 @@
         return searchResult;
     }
 
+    function currentFilePath() {
+        var pathname = window.location.pathname;
+        if (!pathname || pathname === '/') {
+            return null;
+        }
+        return pathname.replace(/\/+$/, '');
+    }
+
+    function highlightCurrentFile() {
+        var current = currentFilePath();
+        $('#fileArea a').removeClass('current-file');
+        if (!current) {
+            return;
+        }
+        $('#fileArea a').filter(function () {
+            return $(this).attr('href') === current;
+        }).addClass('current-file');
+    }
+
     // Keep ancestor folders open after navigating to a nested file.
     // File links trigger a full page reload, which resets the tree to closed.
     function expandPathToCurrentFile() {
-        var pathname = window.location.pathname;
-        if (!pathname || pathname === '/') {
+        var pathname = currentFilePath();
+        if (!pathname) {
             return;
         }
 
         var segments = pathname.replace(/^\/+|\/+$/g, '').split('/');
         // Top-level files need no folder expansion.
         if (segments.length < 2) {
+            highlightCurrentFile();
             return;
         }
 
@@ -121,6 +143,7 @@
 
         function expandAt(index, $parent) {
             if (index >= dirSegments.length) {
+                highlightCurrentFile();
                 return;
             }
 
