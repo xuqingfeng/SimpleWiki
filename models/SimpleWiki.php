@@ -63,8 +63,7 @@ class SimpleWiki {
 
             if (isset($_POST["link"])) {
                 // get files in dir
-                $link = $_POST["link"];
-                $files = $this->getFilesInDir($this->config["WIKI_DIR"] . "/$link");
+                $files = $this->getFilesInDir($this->resolveWikiPath($_POST["link"]));
                 $msg = [
                     "files" => $files,
                 ];
@@ -122,18 +121,47 @@ class SimpleWiki {
         return $content;
     }
 
+    /*
+     * Join WIKI_DIR with a relative link without producing "//" segments.
+     * Accepts "", "test", "/test/a", "//test/a/b".
+     */
+    private function resolveWikiPath($link) {
+
+        $link = trim(str_replace('\\', '/', (string)$link), '/');
+        if ($link === '') {
+            return $this->config["WIKI_DIR"];
+        }
+
+        return $this->config["WIKI_DIR"] . '/' . $link;
+    }
+
+    /*
+     * Absolute wiki path -> URL path with a single leading slash, e.g. "/test/a/b".
+     * Root wiki dir returns "".
+     */
+    private function toRelativeLink($absolutePath) {
+
+        $relative = str_replace($this->config["WIKI_DIR"], "", $absolutePath);
+        $relative = trim(str_replace('\\', '/', $relative), '/');
+        if ($relative === '') {
+            return '';
+        }
+
+        return '/' . $relative;
+    }
+
     private function getFilesInDir($path) {
 
         $files = [];
         if (is_dir($path)) {
             $filesInDir = scandir($path);
             $validFiles = array_diff($filesInDir, $this->config["IGNORE_FILES"]);
-            $relativePath = str_replace($this->config["WIKI_DIR"], "", $path);
+            $relativePath = $this->toRelativeLink($path);
             foreach ($validFiles as $f) {
                 if (is_dir($path . '/' . $f)) {
                     $file = [
                         "name"  => $f,
-                        "link"  => $relativePath . "" . $f,
+                        "link"  => $relativePath . "/" . $f,
                         "type"  => "dir",
                         "isDir" => true,
                     ];
@@ -164,7 +192,7 @@ class SimpleWiki {
                 if (is_dir($path . "/" . $f)) {
                     $this->getAllWikiFiles($path . "/" . $f);
                 } else {
-                    $relativePath = str_replace($this->config["WIKI_DIR"], "", $path);
+                    $relativePath = $this->toRelativeLink($path);
                     $pathParts = pathinfo($path . "/" . $f);
                     $file = [
                         "name" => $f,

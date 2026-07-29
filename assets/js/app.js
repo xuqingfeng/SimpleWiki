@@ -27,13 +27,13 @@
             if ('' != searchData) {
                 searchFiles(searchData);
             } else {
-                getFilesByDir('', $('#fileArea'));
+                getFilesByDir('', $('#fileArea'), expandPathToCurrentFile);
             }
         }
 
     });
 
-    function getFilesByDir(link, target) {
+    function getFilesByDir(link, target, done) {
         loading.start();
         $.ajax({
             url: getFilesUrl,
@@ -54,6 +54,9 @@
                 });
                 stringInserted += "</ul>";
                 target.append(stringInserted);
+                if (typeof done === 'function') {
+                    done();
+                }
             },
             error: function () {
             },
@@ -95,11 +98,69 @@
         return searchResult;
     }
 
+    // Keep ancestor folders open after navigating to a nested file.
+    // File links trigger a full page reload, which resets the tree to closed.
+    function expandPathToCurrentFile() {
+        var pathname = window.location.pathname;
+        if (!pathname || pathname === '/') {
+            return;
+        }
+
+        var segments = pathname.replace(/^\/+|\/+$/g, '').split('/');
+        // Top-level files need no folder expansion.
+        if (segments.length < 2) {
+            return;
+        }
+
+        var dirSegments = segments.slice(0, -1);
+
+        function dirLinkAt(index) {
+            // All dirs use a leading slash, e.g. "/test", "/test/a/b".
+            return '/' + dirSegments.slice(0, index + 1).join('/');
+        }
+
+        function expandAt(index, $parent) {
+            if (index >= dirSegments.length) {
+                return;
+            }
+
+            var dirLink = dirLinkAt(index);
+            var $dir = $parent.children('li').filter(function () {
+                return $(this).data('type') === 'dir'
+                    && String($(this).data('link')) === String(dirLink);
+            }).first();
+
+            if (!$dir.length) {
+                return;
+            }
+
+            function goDeeper() {
+                expandAt(index + 1, $dir.children('ul.folder'));
+            }
+
+            if ($dir.data('yo') === 'open') {
+                goDeeper();
+                return;
+            }
+
+            $dir.data('yo', 'open');
+            getFilesByDir(dirLink, $dir, goDeeper);
+        }
+
+        expandAt(0, $('#fileArea'));
+    }
+
     var dot = document.getElementById("loading");
 
     var loading = {
         intervalId: 0,
+        pending: 0,
         start: function(){
+            this.pending++;
+            if (this.pending > 1) {
+                return;
+            }
+            clearInterval(this.intervalId);
             dot.innerHTML = "";
             this.intervalId = setInterval(function(){
                 if( dot.innerHTML.length < 4){
@@ -110,9 +171,16 @@
             }, 200);
         },
         stop: function(){
+            this.pending = Math.max(0, this.pending - 1);
+            if (this.pending > 0) {
+                return;
+            }
             clearInterval(this.intervalId);
+            this.intervalId = 0;
             dot.innerHTML = "";
         }
     };
+
+    expandPathToCurrentFile();
 
 })();
