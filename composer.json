@@ -1,7 +1,7 @@
 {
     "name": "xuqingfeng/simplewiki",
     "description": "a simple & small wiki service just as you need",
-    "type": "library",
+    "type": "project",
     "keywords": [
         "wiki",
         "cms"
